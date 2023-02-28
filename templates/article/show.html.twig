@@ -5,50 +5,43 @@
 {% block body %}
     <h1>Article</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ article.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ article.content }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ article.slug }}</td>
-            </tr>
-            <tr>
-                <th>FeaturedText</th>
-                <td>{{ article.featuredText }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ article.status }}</td>
-            </tr>
-            <tr>
-                <th>FeaturedImage</th>
-                <td>{{ article.featuredImage }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <img class="img-fluid" src="{{ article.featuredImage }}" alt="{{ article.featuredText }}">
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">{{ article.title }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="h1 card-title pricing-card-title">
+                                 €
+                            </p>
+                            <button class="btn btn-lg btn-block btn-outline-primary" type="button">Contacter le vendeur</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h2>Contenu</h2>
+                <p>
+                    {{ article.content }}
+                </p>
+            </div>
+        </div>
+    </div>
 
     <a href="{{ path('app_article_index') }}">back to list</a>
 
     <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
 
     {{ include('article/_delete_form.html.twig') }}
+    {% include 'article/comments.html.twig' %}
 {% endblock %}
