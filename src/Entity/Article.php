@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -87,12 +88,16 @@ class Article
 
     public function getSlug(): ?string
     {
+        if (!$this->slug) {
+            $this->setSlug($this->title);
+        }
         return $this->slug;
     }
 
     public function setSlug(?string $slug): self
     {
-        $this->slug = $slug;
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($slug);
 
         return $this;
     }
