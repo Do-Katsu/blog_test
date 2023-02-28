@@ -46,7 +46,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setIsActive(true)
             ;
-            $manager->persist($article);
+            $manager->persist($comment);
         }
         // $product = new Product();
         // $manager->persist($product);
